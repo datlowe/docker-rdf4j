@@ -26,4 +26,6 @@ CMD bash set_sesame_pass_and_run.sh run
 
 VOLUME ${RDF4J_DATA}
 
-EXPOSE 8080
+RUN sed -i -e s/8080/8082/ /usr/local/tomcat/conf/server.xml
+
+EXPOSE 8082
