@@ -12,10 +12,13 @@ RUN curl -sS -o /tmp/rdf4j.zip -L http://download.eclipse.org/rdf4j/eclipse-rdf4
     rm /usr/local/tomcat/webapps/rdf4j-server.war && \
     rm /tmp/rdf4j.zip
 
+COPY st-changetracking-sail-5.0.jar /usr/local/tomcat/webapps/rdf4j-server/WEB-INF/lib/
+
 COPY conf/ /usr/local/tomcat/conf/
 
 RUN sed -i -e 's/<\/web-app>//' /usr/local/tomcat/conf/web.xml && \
 	cat /usr/local/tomcat/conf/server_web_xml_security_end.xml >> /usr/local/tomcat/conf/web.xml
+  
 
 RUN echo "CATALINA_OPTS=\"\$CATALINA_OPTS \$JVM_PARAMS -Dorg.eclipse.rdf4j.appdata.basedir=\$RDF4J_DATA\"" >> /usr/local/tomcat/bin/setenv.sh
 
